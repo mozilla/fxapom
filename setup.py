@@ -9,10 +9,10 @@ except (OSError, IOError):
     description = ''
 
 # dependencies
-deps = ['PyFxA==0.0.1']
+deps = ['PyFxA==0.0.5']
 
 setup(name='fxapom',
-      version='1.1',
+      version='1.2',
       description="Mozilla Firefox Accounts Page Object Model",
       long_description=description,
       classifiers=[],  # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
