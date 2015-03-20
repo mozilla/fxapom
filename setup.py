@@ -12,7 +12,7 @@ except (OSError, IOError):
 deps = ['PyFxA==0.0.1']
 
 setup(name='fxapom',
-      version='1.0',
+      version='1.1',
       description="Mozilla Firefox Accounts Page Object Model",
       long_description=description,
       classifiers=[],  # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
