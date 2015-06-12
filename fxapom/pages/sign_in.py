@@ -71,5 +71,5 @@ class SignIn(Base):
         self.selenium.find_element(*self._sign_in_locator).click()
         if self.popup:
             WebDriverWait(self.selenium, self.timeout).until(
-                        lambda s: self._sign_in_window_handle not in self.selenium.window_handles)
+                lambda s: self._sign_in_window_handle not in self.selenium.window_handles)
             self.switch_to_main_window()

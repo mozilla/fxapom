@@ -5,8 +5,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
-from fxapom.fxapom import FxATestAccount
-from fxapom.fxapom import WebDriverFxA
+from fxapom.fxapom import FxATestAccount, WebDriverFxA
 
 
 class TestLogin(object):
@@ -14,7 +13,7 @@ class TestLogin(object):
     _fxa_logged_in_indicator_locator = (By.ID, 'loggedin')
 
     def test_user_can_sign_in(self, mozwebqa):
-        acct = FxATestAccount(base_url='https://www-dev.allizom.org').create_account()
+        acct = FxATestAccount().create_account()
         fxa = WebDriverFxA(mozwebqa)
         fxa.sign_in(acct.email, acct.password)
         WebDriverWait(mozwebqa.selenium, mozwebqa.timeout).until(

@@ -1,3 +1,2 @@
-PyFxA==0.0.5
+PyFxA==0.0.6
 pytest-mozwebqa
-unittestzero

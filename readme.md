@@ -13,13 +13,24 @@ as well as a set of page objects that can be used to interact with Firefox Accou
 Usage
 -----
 To create a test Firefox Account, use the `create_account` method in the `FxATestAccount` object.
-You should pass the base url for the site for which you are creating the account into the constructor
-for `FxATestAccount`, or, if you know you want to create a production Account, you can omit that argument.
+You can pass the url for the Firefox Accounts API server into the constructor
+or, if you know you want to create a development Account, you can omit that argument.
 
-Example:
+There are two constants available to you to specify the url for either the development environment
+or the production environment, which are:
+- `fxapom.DEV_URL` - the url for the development environment
+- `fxapom.PROD_URL` - the url for the production environment
+
+Example of creating an account on the development environment, using the default:
 ```python
 from fxapom.fxapom import FxATestAccount
-acct = FxATestAccount(base_url='https://www-dev.allizom.org').create_account()
+acct = FxATestAccount().create_account()
+```
+
+Example of creating an account on the development environment, specifying the `DEV_URL`:
+```python
+from fxapom.fxapom import DEV_URL, FxATestAccount
+acct = FxATestAccount(DEV_URL).create_account()
 ```
 
 To sign in via Firefox Accounts, use the `sign_in` method in the `WebDriverFxA` object,
@@ -41,9 +52,8 @@ To create an account and then use it to sign in, use both tools described above.
 
 Example:
 ```python
-from fxapom.fxapom import FxATestAccount
-from fxapom.fxapom import WebDriverFxA
-acct = FxATestAccount(base_url='https://www-dev.allizom.org').create_account()
+from fxapom.fxapom import FxATestAccount, WebDriverFxA
+acct = FxATestAccount().create_account()
 fxa = WebDriverFxA(mozwebqa)
 fxa.sign_in(acct.email, acct.password)
 ```
@@ -60,3 +70,23 @@ This software is licensed under the [MPL](http://www.mozilla.org/MPL/2.0/) 2.0:
     This Source Code Form is subject to the terms of the Mozilla Public
     License, v. 2.0. If a copy of the MPL was not distributed with this
     file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+Change Log
+==========
+
+1.3
+---
+* Change FxATestAccount constructor to accept the url to the FxA API server
+  * This is a **breaking change**
+
+1.2
+---
+* Update required version of PyFxA in setup.py to 0.0.5
+
+1.1
+---
+* Update required version of PyFxA in requirements.txt to 0.0.5
+
+1.0
+---
+* Initial release

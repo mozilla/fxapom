@@ -7,8 +7,6 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import ElementNotVisibleException
-from selenium.common.exceptions import TimeoutException
-from unittestzero import Assert
 
 
 class Page(object):
@@ -86,7 +84,5 @@ class Page(object):
         try:
             WebDriverWait(self.selenium, self.timeout).until(lambda s: len(self.find_elements(*locator)) < 1)
             return True
-        except TimeoutException:
-            Assert.fail(TimeoutException)
         finally:
             self.selenium.implicitly_wait(self.testsetup.default_implicit_wait)

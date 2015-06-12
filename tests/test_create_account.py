@@ -4,26 +4,28 @@
 import re
 
 import pytest
-from unittestzero import Assert
 
-from fxapom.fxapom import FxATestAccount
+from fxapom.fxapom import DEV_URL, FxATestAccount, PROD_URL
 
 
-@pytest.mark.nondestructive
 @pytest.mark.skip_selenium
 class TestCreateAccount(object):
 
-    def test_create_new_account_on_dev(self):
-        acct = FxATestAccount(base_url='https://www-dev.allizom.org').create_account()
-        Assert.true(acct.is_verified)
-        Assert.equal('https://stable.dev.lcip.org/auth/', acct.fxa_url)
+    def test_default_environment_should_be_dev(self):
+        acct = FxATestAccount()
+        assert DEV_URL == acct.url
 
-    def test_create_new_account_on_stage(self):
-        acct = FxATestAccount(base_url='https://www.allizom.org').create_account()
-        Assert.true(acct.is_verified)
-        Assert.equal('https://api.accounts.firefox.com/', acct.fxa_url)
+    def test_create_new_account_on_dev(self):
+        acct = FxATestAccount(DEV_URL).create_account()
+        assert acct.is_verified
+        assert DEV_URL == acct.url
+
+    def test_create_new_account_on_prod(self):
+        acct = FxATestAccount(PROD_URL).create_account()
+        assert acct.is_verified
+        assert PROD_URL == acct.url
 
     def test_new_account_pw_does_not_contain_numbers(self):
-        acct = FxATestAccount(base_url='https://www-dev.allizom.org').create_account()
+        acct = FxATestAccount().create_account()
         test_regex = re.compile('\d')
-        Assert.equal(None, test_regex.search(acct.password))
+        assert test_regex.search(acct.password) is None
