@@ -10,6 +10,11 @@ from fxa.core import Client
 from fxa.tests.utils import TestEmailAccount
 
 
+# Constants for available FxA environments
+DEV_URL = 'https://stable.dev.lcip.org/auth/'
+PROD_URL = 'https://api.accounts.firefox.com/'
+
+
 class WebDriverFxA(object):
 
     def __init__(self, testsetup):
@@ -27,21 +32,22 @@ class FxATestAccount:
 
     password = ''.join([random.choice(string.letters) for i in range(8)])
 
-    def __init__(self, base_url=None):
-        if base_url and '-dev.allizom' in base_url:
-            self.fxa_url = 'https://stable.dev.lcip.org/auth/'
-        else:
-            self.fxa_url = 'https://api.accounts.firefox.com/'
+    def __init__(self, url=DEV_URL):
+        """ Creates an FxATestAccount object.
+
+        :param url: The url for the api host. Defaults to DEV_URL.
+        """
+        self.url = url
 
     def create_account(self):
         random_string = ''.join(random.choice(string.ascii_lowercase) for _ in range(12))
         email_pattern = random_string + '@{hostname}'
         self.account = TestEmailAccount(email=email_pattern)
-        client = Client(self.fxa_url)
+        client = Client(self.url)
         # Create and verify the Firefox account
         self.session = client.create_account(self.account.email, self.password)
         print 'fxapom created an account for email: %s at %s on %s' % (
-            self.account.email, self.fxa_url, datetime.now())
+            self.account.email, self.url, datetime.now())
         m = self.account.wait_for_email(lambda m: "x-verify-code" in m["headers"])
         if not m:
             raise RuntimeError("Verification email was not received")
