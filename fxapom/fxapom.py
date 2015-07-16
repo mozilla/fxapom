@@ -7,12 +7,16 @@ import random
 from datetime import datetime
 
 from fxa.core import Client
+from fxa.errors import ClientError
 from fxa.tests.utils import TestEmailAccount
-
 
 # Constants for available FxA environments
 DEV_URL = 'https://stable.dev.lcip.org/auth/'
 PROD_URL = 'https://api.accounts.firefox.com/'
+
+
+class AccountNotFoundException(Exception):
+    pass
 
 
 class WebDriverFxA(object):
@@ -43,9 +47,9 @@ class FxATestAccount:
         random_string = ''.join(random.choice(string.ascii_lowercase) for _ in range(12))
         email_pattern = random_string + '@{hostname}'
         self.account = TestEmailAccount(email=email_pattern)
-        client = Client(self.url)
+        self.client = Client(self.url)
         # Create and verify the Firefox account
-        self.session = client.create_account(self.account.email, self.password)
+        self.session = self.client.create_account(self.account.email, self.password)
         print 'fxapom created an account for email: %s at %s on %s' % (
             self.account.email, self.url, datetime.now())
         m = self.account.wait_for_email(lambda m: "x-verify-code" in m["headers"])
@@ -53,6 +57,29 @@ class FxATestAccount:
             raise RuntimeError("Verification email was not received")
         self.session.verify_email_code(m["headers"]["x-verify-code"])
         return self
+
+    def delete_account(self):
+        try:
+            self.account.clear()
+            self.client.destroy_account(self.email, self.password)
+        except ClientError as err:
+            # 'Unknown Account' error is ok - account already deleted
+            # https://github.com/mozilla/fxa-auth-server/blob/master/docs/api.md#response-format
+            if err.errno == 102:
+                return
+            raise
+
+    def login(self):
+        try:
+            session = self.client.login(self.email, self.password)
+            return session
+        except ClientError as err:
+            # 'Unknown Account' error is the only one we care about and will
+            # cause us to throw a custom exception
+            # https://github.com/mozilla/fxa-auth-server/blob/master/docs/api.md#response-format
+            if err.errno == 102:
+                raise AccountNotFoundException('FxA Account Not Found')
+            raise
 
     @property
     def email(self):
