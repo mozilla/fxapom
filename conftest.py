@@ -20,21 +20,9 @@ def pytest_funcarg__mozwebqa(request):
 
 @pytest.fixture(params=[DEV_URL, PROD_URL])
 def account(request):
-    account = FxATestAccount(request.param).create_account()
-
-    def fin():
-        account.delete_account()
-    request.addfinalizer(fin)
-
-    return account
+    return FxATestAccount(request.param)
 
 
 @pytest.fixture
-def dev_account(request):
-    account = FxATestAccount(DEV_URL).create_account()
-
-    def fin():
-        account.delete_account()
-    request.addfinalizer(fin)
-
-    return account
+def dev_account():
+    return FxATestAccount(DEV_URL)
