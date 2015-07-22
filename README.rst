@@ -28,7 +28,7 @@ as well as a set of page objects that can be used to interact with Firefox Accou
 Usage
 -----
 
-To create a test Firefox Account, use the ``create_account`` method in the ``FxATestAccount`` object.
+To create a test Firefox Account, simply create an instance of the ``FxATestAccount`` object.
 You can pass the url for the Firefox Accounts API server into the constructor
 or, if you know you want to create a development Account, you can omit that argument.
 
@@ -43,7 +43,7 @@ Example of creating an account on the development environment, using the default
 .. code-block:: python
 
   from fxapom.fxapom import FxATestAccount
-  acct = FxATestAccount().create_account()
+  account = FxATestAccount()
 
 
 Example of creating an account on the development environment, specifying the ``DEV_URL``:
@@ -51,7 +51,7 @@ Example of creating an account on the development environment, specifying the ``
 .. code-block:: python
 
   from fxapom.fxapom import DEV_URL, FxATestAccount
-  acct = FxATestAccount(DEV_URL).create_account()
+  account = FxATestAccount(DEV_URL)
 
 To sign in via Firefox Accounts, use the ``sign_in`` method in the ``WebDriverFxA`` object,
 passing in the email address and password:
@@ -70,23 +70,30 @@ To create an account and then use it to sign in, use both tools described above:
 .. code-block:: python
 
   from fxapom.fxapom import FxATestAccount, WebDriverFxA
-  acct = FxATestAccount().create_account()
+  account = FxATestAccount()
   fxa = WebDriverFxA(mozwebqa)
-  fxa.sign_in(acct.email, acct.password)
+  fxa.sign_in(account.email, account.password)
 
 Running The Tests
 -----------------
 
-* Install the requirements using `pip install -r requirements.txt`
-* Run the tests using a local Firefox browser via `py.test --driver=Firefox tests`
+* Install the requirements using ``pip install -r requirements.txt``
+* Run the tests using a local Firefox browser via ``py.test --driver=Firefox tests``
 
 Change Log
 ----------
 
+1.4
+^^^
+
+* Accounts created via ``FxATestAccount`` are now automatically deleted when the object leaves scope
+* The ``create_account`` method has been removed from ``FxATestAccount`` as accounts are now automatically created on instantiation
+* This is a **breaking change**
+
 1.3.1
 ^^^^^
 
-* Change the README to `rst` format
+* Change the README to ``rst`` format
 
 1.3
 ^^^
