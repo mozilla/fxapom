@@ -4,7 +4,6 @@
 
 import re
 
-import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -15,22 +14,19 @@ class TestFxATestAccount(object):
 
     _fxa_unknown_account_error_locator = (By.CSS_SELECTOR, '#main-content div.error')
 
-    @pytest.mark.skip_selenium
     def test_default_environment_should_be_dev(self):
         account = FxATestAccount()
         assert DEV_URL == account.url
 
-    @pytest.mark.skip_selenium
     def test_create_new_account(self, account):
         assert account.is_verified
         # Test logging in - will throw an exception if log in fails
         account.login()
 
-    @pytest.mark.skip_selenium
     def test_new_account_pw_does_not_contain_numbers(self, account):
         assert re.search(r'\d', account.password) is None
 
-    def test_del(self, mozwebqa):
+    def test_del(self, base_url, selenium, click_login):
         """ Check that the __del__ method does destroy the FxA """
         account = FxATestAccount()
         email = account.email
@@ -40,8 +36,8 @@ class TestFxATestAccount(object):
         del account
 
         # try to log in
-        fxa = WebDriverFxA(mozwebqa)
+        fxa = WebDriverFxA(base_url, selenium)
         fxa.sign_in(email, password)
-        WebDriverWait(mozwebqa.selenium, mozwebqa.timeout).until(
+        WebDriverWait(selenium, 10).until(
             lambda s: s.find_element(*self._fxa_unknown_account_error_locator).is_displayed())
-        assert 'Unknown account' in mozwebqa.selenium.find_element(*self._fxa_unknown_account_error_locator).text
+        assert 'Unknown account' in selenium.find_element(*self._fxa_unknown_account_error_locator).text

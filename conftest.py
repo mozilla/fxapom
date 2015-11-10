@@ -8,14 +8,19 @@ from selenium.webdriver.support.ui import WebDriverWait
 from fxapom.fxapom import DEV_URL, FxATestAccount, PROD_URL
 
 
-def pytest_funcarg__mozwebqa(request):
+@pytest.fixture(scope='session')
+def capabilities(capabilities):
+    capabilities.setdefault('tags', []).append('fxapom')
+    return capabilities
+
+
+@pytest.fixture
+def click_login(base_url, selenium):
     fxa_login_button_locator_css = 'button.signin'
-    mozwebqa = request.getfuncargvalue('mozwebqa')
-    mozwebqa.selenium.get('%s/' % mozwebqa.base_url)
-    WebDriverWait(mozwebqa.selenium, mozwebqa.timeout).until(
+    selenium.get('%s/' % base_url)
+    WebDriverWait(selenium, 10).until(
         lambda s: s.find_element_by_css_selector(fxa_login_button_locator_css).is_displayed())
-    mozwebqa.selenium.find_element_by_css_selector(fxa_login_button_locator_css).click()
-    return mozwebqa
+    selenium.find_element_by_css_selector(fxa_login_button_locator_css).click()
 
 
 @pytest.fixture(params=[DEV_URL, PROD_URL])

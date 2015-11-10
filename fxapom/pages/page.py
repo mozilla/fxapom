@@ -9,16 +9,15 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import ElementNotVisibleException
 
 
+TIMEOUT = 10
+
+
 class Page(object):
-    """Base class for all Pages"""
 
-    def __init__(self, testsetup):
-        """Constructor"""
-
-        self.testsetup = testsetup
-        self.base_url = testsetup.base_url
-        self.selenium = testsetup.selenium
-        self.timeout = testsetup.timeout
+    def __init__(self, base_url, selenium):
+        self.base_url = base_url
+        self.selenium = selenium
+        self.timeout = TIMEOUT
         self._selenium_root = hasattr(self, '_root_element') and self._root_element or self.selenium
 
     def is_element_present(self, *locator):
@@ -34,7 +33,7 @@ class Page(object):
             return False
         finally:
             # set the implicit wait back
-            self.selenium.implicitly_wait(self.testsetup.default_implicit_wait)
+            self.selenium.implicitly_wait(self.timeout)
 
     def is_element_visible(self, *locator):
         """
@@ -58,7 +57,7 @@ class Page(object):
             return True
         finally:
             # set the implicit wait back
-            self.selenium.implicitly_wait(self.testsetup.default_implicit_wait)
+            self.selenium.implicitly_wait(self.timeout)
 
     def wait_for_element_present(self, *locator):
         """Wait for the element at the specified locator to be present in the DOM."""
@@ -85,4 +84,4 @@ class Page(object):
             WebDriverWait(self.selenium, self.timeout).until(lambda s: len(self.find_elements(*locator)) < 1)
             return True
         finally:
-            self.selenium.implicitly_wait(self.testsetup.default_implicit_wait)
+            self.selenium.implicitly_wait(self.timeout)

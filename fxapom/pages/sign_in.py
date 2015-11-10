@@ -5,6 +5,7 @@
 from base import Base
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 
@@ -16,8 +17,8 @@ class SignIn(Base):
     _password_input_locator = (By.ID, 'password')
     _sign_in_locator = (By.ID, 'submit-btn')
 
-    def __init__(self, testsetup):
-        Base.__init__(self, testsetup)
+    def __init__(self, base_url, selenium):
+        Base.__init__(self, base_url, selenium)
 
         if len(self.selenium.window_handles) > 1:
             self.popup = True
@@ -48,7 +49,8 @@ class SignIn(Base):
     @email.setter
     def email(self, value):
         """Set the value of the email field."""
-        email = self.selenium.find_element(*self._email_input_locator)
+        email = WebDriverWait(self.selenium, self.timeout).until(
+            EC.visibility_of_element_located(self._email_input_locator))
         email.clear()
         email.send_keys(value)
 

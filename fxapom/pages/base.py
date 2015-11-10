@@ -6,8 +6,8 @@ from page import Page
 
 class Base(Page):
 
-    def __init__(self, testsetup):
-        super(Base, self).__init__(testsetup)
+    def __init__(self, base_url, selenium):
+        super(Base, self).__init__(base_url, selenium)
         self._main_window_handle = self.selenium.current_window_handle
 
     def switch_to_main_window(self):
