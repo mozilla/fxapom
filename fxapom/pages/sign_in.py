@@ -6,7 +6,9 @@ from base import Base
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import WebDriverWait as Wait
+
+from ..fxapom import TIMEOUT
 
 
 class SignIn(Base):
@@ -17,15 +19,16 @@ class SignIn(Base):
     _password_input_locator = (By.ID, 'password')
     _sign_in_locator = (By.ID, 'submit-btn')
 
-    def __init__(self, base_url, selenium):
-        Base.__init__(self, base_url, selenium)
+    def __init__(self, base_url, selenium, timeout=TIMEOUT):
+        Base.__init__(self, base_url, selenium, timeout)
 
         if len(self.selenium.window_handles) > 1:
             self.popup = True
             for handle in self.selenium.window_handles:
                 self.selenium.switch_to.window(handle)
-                if self.is_element_present(*self._fox_logo_locator):
-                    self.wait_for_element_visible(*self._email_input_locator)
+                if self.is_element_visible(*self._fox_logo_locator):
+                    Wait(self.selenium, self.timeout).until(
+                        EC.visibility_of_element_located(self._email_input_locator))
                     self._sign_in_window_handle = handle
                     break
             else:
@@ -36,7 +39,7 @@ class SignIn(Base):
     def sign_in(self, email, password):
         """Signs in using the specified email address and password."""
         self.email = email
-        if self.is_element_present(*self._next_button_locator):
+        if self.is_element_visible(*self._next_button_locator):
             self.click_next()
         self.login_password = password
         self.click_sign_in()
@@ -49,7 +52,7 @@ class SignIn(Base):
     @email.setter
     def email(self, value):
         """Set the value of the email field."""
-        email = WebDriverWait(self.selenium, self.timeout).until(
+        email = Wait(self.selenium, self.timeout).until(
             EC.visibility_of_element_located(self._email_input_locator))
         email.clear()
         email.send_keys(value)
@@ -72,6 +75,6 @@ class SignIn(Base):
     def click_sign_in(self):
         self.selenium.find_element(*self._sign_in_locator).click()
         if self.popup:
-            WebDriverWait(self.selenium, self.timeout).until(
+            Wait(self.selenium, self.timeout).until(
                 lambda s: self._sign_in_window_handle not in self.selenium.window_handles)
             self.switch_to_main_window()

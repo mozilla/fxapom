@@ -5,7 +5,8 @@
 import re
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait as Wait
 
 from fxapom.fxapom import DEV_URL, FxATestAccount, WebDriverFxA
 
@@ -26,7 +27,7 @@ class TestFxATestAccount(object):
     def test_new_account_pw_does_not_contain_numbers(self, account):
         assert re.search(r'\d', account.password) is None
 
-    def test_del(self, base_url, selenium, click_login):
+    def test_del(self, base_url, selenium, click_login, timeout):
         """ Check that the __del__ method does destroy the FxA """
         account = FxATestAccount()
         email = account.email
@@ -38,6 +39,6 @@ class TestFxATestAccount(object):
         # try to log in
         fxa = WebDriverFxA(base_url, selenium)
         fxa.sign_in(email, password)
-        WebDriverWait(selenium, 10).until(
-            lambda s: s.find_element(*self._fxa_unknown_account_error_locator).is_displayed())
-        assert 'Unknown account' in selenium.find_element(*self._fxa_unknown_account_error_locator).text
+        el = Wait(selenium, timeout).until(
+            EC.visibility_of_element_located(self._fxa_unknown_account_error_locator))
+        assert 'Unknown account' in el.text

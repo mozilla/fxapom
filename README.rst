@@ -83,6 +83,12 @@ Running The Tests
 Change Log
 ----------
 
+1.5
+^^^
+
+* Switch the test suite to use ``pytest-selenium``
+* Remove implicit waits from the tests and page objects
+
 1.4
 ^^^
 

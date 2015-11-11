@@ -1,13 +1,15 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+from ..fxapom import TIMEOUT
 from page import Page
 
 
 class Base(Page):
 
-    def __init__(self, base_url, selenium):
-        super(Base, self).__init__(base_url, selenium)
+    def __init__(self, base_url, selenium, timeout=TIMEOUT):
+        super(Base, self).__init__(base_url, selenium, timeout)
         self._main_window_handle = self.selenium.current_window_handle
 
     def switch_to_main_window(self):

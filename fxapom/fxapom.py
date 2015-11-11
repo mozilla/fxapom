@@ -14,6 +14,8 @@ from fxa.tests.utils import TestEmailAccount
 DEV_URL = 'https://stable.dev.lcip.org/auth/'
 PROD_URL = 'https://api.accounts.firefox.com/'
 
+TIMEOUT = 20
+
 
 class AccountNotFoundException(Exception):
     pass
@@ -21,14 +23,15 @@ class AccountNotFoundException(Exception):
 
 class WebDriverFxA(object):
 
-    def __init__(self, base_url, selenium):
+    def __init__(self, base_url, selenium, timeout=TIMEOUT):
         self.base_url = base_url
         self.selenium = selenium
+        self.timeout = timeout
 
     def sign_in(self, email=None, password=None):
         """Signs in a user, either with the specified email address and password, or a returning user."""
         from pages.sign_in import SignIn
-        sign_in = SignIn(self.base_url, self.selenium)
+        sign_in = SignIn(self.base_url, self.selenium, self.timeout)
         sign_in.sign_in(email, password)
 
 
