@@ -4,7 +4,7 @@
 
 from selenium.common.exceptions import NoSuchElementException
 
-from ..fxapom import TIMEOUT
+from fxapom.fxapom import TIMEOUT
 
 
 class Page(object):
