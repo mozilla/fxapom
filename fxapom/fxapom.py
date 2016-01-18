@@ -23,15 +23,14 @@ class AccountNotFoundException(Exception):
 
 class WebDriverFxA(object):
 
-    def __init__(self, base_url, selenium, timeout=TIMEOUT):
-        self.base_url = base_url
+    def __init__(self, selenium, timeout=TIMEOUT):
         self.selenium = selenium
         self.timeout = timeout
 
     def sign_in(self, email=None, password=None):
         """Signs in a user, either with the specified email address and password, or a returning user."""
         from pages.sign_in import SignIn
-        sign_in = SignIn(self.base_url, self.selenium, self.timeout)
+        sign_in = SignIn(self.selenium, self.timeout)
         sign_in.sign_in(email, password)
 
 

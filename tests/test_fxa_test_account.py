@@ -37,7 +37,7 @@ class TestFxATestAccount(object):
         del account
 
         # try to log in
-        fxa = WebDriverFxA(base_url, selenium)
+        fxa = WebDriverFxA(selenium)
         fxa.sign_in(email, password)
         el = Wait(selenium, timeout).until(
             EC.visibility_of_element_located(self._fxa_unknown_account_error_locator))

@@ -19,8 +19,8 @@ class SignIn(Base):
     _password_input_locator = (By.ID, 'password')
     _sign_in_locator = (By.ID, 'submit-btn')
 
-    def __init__(self, base_url, selenium, timeout=TIMEOUT):
-        Base.__init__(self, base_url, selenium, timeout)
+    def __init__(self, selenium, timeout=TIMEOUT):
+        Base.__init__(self, selenium, timeout)
 
         if len(self.selenium.window_handles) > 1:
             self.popup = True
@@ -47,7 +47,7 @@ class SignIn(Base):
     @property
     def email(self):
         """Get the value of the email field."""
-        return self.selenium.find_element(*self._email_locator).get_attribute('value')
+        return self.selenium.find_element(*self._email_input_locator).get_attribute('value')
 
     @email.setter
     def email(self, value):
@@ -60,7 +60,7 @@ class SignIn(Base):
     @property
     def login_password(self):
         """Get the value of the login password field."""
-        return self.selenium.find_element(*self._login_password_locator).get_attribute('value')
+        return self.selenium.find_element(*self._password_input_locator).get_attribute('value')
 
     @login_password.setter
     def login_password(self, value):

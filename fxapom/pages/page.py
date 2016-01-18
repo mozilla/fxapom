@@ -9,14 +9,12 @@ from fxapom.fxapom import TIMEOUT
 
 class Page(object):
 
-    def __init__(self, base_url, selenium, timeout=TIMEOUT):
-        self.base_url = base_url
+    def __init__(self, selenium, timeout=TIMEOUT):
         self.selenium = selenium
         self.timeout = timeout
-        self._selenium_root = hasattr(self, '_root_element') and self._root_element or self.selenium
 
     def is_element_visible(self, *locator):
         try:
-            return self._selenium_root.find_element(*locator).is_displayed()
+            return self.selenium.find_element(*locator).is_displayed()
         except (NoSuchElementException,):
             return False

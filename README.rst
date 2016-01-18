@@ -59,11 +59,11 @@ passing in the email address and password:
 .. code-block:: python
 
   from fxapom.fxapom import WebDriverFxA
-  fxa = WebDriverFxA(mozwebqa)
+  fxa = WebDriverFxA(selenium)
   fxa.sign_in(email_address, password)
 
-Note that we are passing ``mozwebqa`` into the constructor of ``WebDriverFxA``, which is only
-generally available when using our in-house plugin `pytest-mozwebqa <https://github.com/mozilla/pytest-mozwebqa>`_.
+Note that we are passing ``selenium`` into the constructor of ``WebDriverFxA``,
+which it then uses to interact with the Firefox Accounts web pages.
 
 To create an account and then use it to sign in, use both tools described above:
 
@@ -71,7 +71,7 @@ To create an account and then use it to sign in, use both tools described above:
 
   from fxapom.fxapom import FxATestAccount, WebDriverFxA
   account = FxATestAccount()
-  fxa = WebDriverFxA(mozwebqa)
+  fxa = WebDriverFxA(selenium)
   fxa.sign_in(account.email, account.password)
 
 Running The Tests
@@ -82,6 +82,12 @@ Running The Tests
 
 Change Log
 ----------
+
+1.6
+^^^
+
+* Remove the requirement to pass ``base_url`` into pages in the page object model.
+* Update readme to remove outdated references to ``mozwebqa``.
 
 1.5
 ^^^
