@@ -101,7 +101,7 @@ Change Log
 1.7
 ^^^
 
-* Added `Marionette <https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette>` functionality
+* Added `Marionette <https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette>`_ functionality
 
 1.6
 ^^^
