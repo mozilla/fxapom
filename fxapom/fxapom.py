@@ -1,3 +1,4 @@
+
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -9,6 +10,8 @@ from datetime import datetime
 from fxa.core import Client
 from fxa.errors import ClientError
 from fxa.tests.utils import TestEmailAccount
+
+from selenium.webdriver.remote.webdriver import WebDriver
 
 # Constants for available FxA environments
 DEV_URL = 'https://stable.dev.lcip.org/auth/'
@@ -23,14 +26,17 @@ class AccountNotFoundException(Exception):
 
 class WebDriverFxA(object):
 
-    def __init__(self, selenium, timeout=TIMEOUT):
-        self.selenium = selenium
+    def __init__(self, driver, timeout=TIMEOUT):
+        self.driver = driver
         self.timeout = timeout
 
     def sign_in(self, email=None, password=None):
         """Signs in a user, either with the specified email address and password, or a returning user."""
-        from pages.sign_in import SignIn
-        sign_in = SignIn(self.selenium, self.timeout)
+        if isinstance(self.driver, WebDriver):
+            from pages.sign_in import SignIn
+        else:
+            from pages.marionette.sign_in import MarionetteSignIn as SignIn
+        sign_in = SignIn(self.driver, self.timeout)
         sign_in.sign_in(email, password)
 
 

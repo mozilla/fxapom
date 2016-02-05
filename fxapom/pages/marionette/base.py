@@ -3,13 +3,13 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from fxapom.fxapom import TIMEOUT
-from page import Page
+from fxapom.pages.marionette.page import Page
 
 
 class Base(Page):
 
     def __init__(self, driver, timeout=TIMEOUT):
-        super(Base, self).__init__(driver, timeout)
+        super(Page, self).__init__(driver, timeout)
         self._main_window_handle = self.driver.current_window_handle
 
     def switch_to_main_window(self):

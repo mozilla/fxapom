@@ -2,15 +2,13 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait as Wait
+from marionette_driver import expected, Wait, By
 
 from fxapom.fxapom import TIMEOUT
-from fxapom.pages.base import Base
+from fxapom.pages.marionette.base import Base
 
 
-class SignIn(Base):
+class MarionetteSignIn(Base):
 
     _fox_logo_locator = (By.ID, 'fox-logo')
     _email_input_locator = (By.CSS_SELECTOR, '.input-row .email')
@@ -23,6 +21,21 @@ class SignIn(Base):
         self._sign_in_window_handle = None
         self.popup = False
         self.check_for_popup(self.driver.window_handles)
+
+    @property
+    def email(self):
+        """Get the value of the email field."""
+        return self.driver.find_element(*self._email_input_locator).get_attribute('value')
+
+    @email.setter
+    def email(self, value):
+        """Set the value of the email field."""
+        email = Wait(self.driver, self.timeout).until(
+            expected.element_present(*self._email_input_locator))
+        Wait(self.driver, self.timeout).until(
+            expected.element_displayed(email))
+        email.clear()
+        email.send_keys(value)
 
     @property
     def login_password(self):
@@ -39,38 +52,25 @@ class SignIn(Base):
     def click_next(self):
         self.driver.find_element(*self._next_button_locator).click()
 
-    @property
-    def email(self):
-        """Get the value of the email field."""
-        return self.driver.find_element(*self._email_input_locator).get_attribute('value')
-
-    @email.setter
-    def email(self, value):
-        """Set the value of the email field."""
-        email = Wait(self.driver, self.timeout).until(
-            EC.visibility_of_element_located(self._email_input_locator))
-        email.clear()
-        email.send_keys(value)
-
     def check_for_popup(self, handles):
-        if len(handles) > 1:
+        if len(self.driver.window_handles) > 1:
             self.popup = True
             for handle in handles:
                 self.driver.switch_to.window(handle)
                 if self.is_element_visible(*self._fox_logo_locator):
                     Wait(self.driver, self.timeout).until(
-                        EC.visibility_of_element_located(self._email_input_locator))
+                        expected.element_displayed(*self._email_input_locator))
                     self._sign_in_window_handle = handle
                     break
             else:
                 raise Exception('Popup has not loaded')
 
     def click_sign_in(self):
-        self.driver.find_element(*self._sign_in_locator).click()
-        if self.popup:
-            Wait(self.driver, self.timeout).until(
-                lambda s: self._sign_in_window_handle not in self.driver.window_handles)
-            self.switch_to_main_window()
+            self.driver.find_element(*self._sign_in_locator).click()
+            if self.popup:
+                Wait(self.driver, self.timeout).until(
+                    lambda s: self._sign_in_window_handle not in self.driver.window_handles)
+                self.switch_to_main_window()
 
     def sign_in(self, email, password):
         """Signs in using the specified email address and password."""

@@ -27,7 +27,7 @@ class TestFxATestAccount(object):
     def test_new_account_pw_does_not_contain_numbers(self, account):
         assert re.search(r'\d', account.password) is None
 
-    def test_del(self, base_url, selenium, click_login, timeout):
+    def test_del(self, selenium, click_login, timeout):
         """ Check that the __del__ method does destroy the FxA """
         account = FxATestAccount()
         email = account.email

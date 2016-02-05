@@ -1,10 +1,17 @@
 language: python
-
 python: 2.7
-
-install: "pip install flake8"
-
-script: "flake8 ."
-
+addons:
+  firefox: "latest"
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+install:
+  - pip install flake8
+  - pip install -r tests/requirements.txt
+script:
+  - flake8 .
+  - python setup.py install
+  - py.test -r a -v --driver Firefox tests
 notifications:
   email: webqa-ci@mozilla.org
