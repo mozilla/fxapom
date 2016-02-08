@@ -57,7 +57,7 @@ class SignIn(Base):
             self.popup = True
             for handle in handles:
                 self.driver.switch_to.window(handle)
-                if self.is_element_visible(*self._fox_logo_locator):
+                if self.is_element_present(*self._fox_logo_locator):
                     Wait(self.driver, self.timeout).until(
                         EC.visibility_of_element_located(self._email_input_locator))
                     self._sign_in_window_handle = handle
@@ -76,6 +76,8 @@ class SignIn(Base):
         """Signs in using the specified email address and password."""
         self.email = email
         self.login_password = password
-        if self.is_element_visible(*self._next_button_locator):
+        if self.is_element_present(*self._next_button_locator):
+            Wait(self.driver, self.timeout).until(
+                EC.visibility_of_element_located(self._next_button_locator))
             self.click_next()
         self.click_sign_in()
