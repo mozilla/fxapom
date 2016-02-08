@@ -19,7 +19,7 @@ class SignIn(Base):
     _sign_in_locator = (By.ID, 'submit-btn')
 
     def __init__(self, driver, timeout=TIMEOUT):
-        super(Base, self).__init__(driver, timeout)
+        super(SignIn, self).__init__(driver, timeout)
         self._sign_in_window_handle = None
         self.popup = False
         self.check_for_popup(self.driver.window_handles)
