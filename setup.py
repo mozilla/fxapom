@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='fxapom',
-      version='1.7',
+      version='1.7.1',
       description='Mozilla Firefox Accounts Page Object Model',
       long_description=open('README.rst').read(),
       classifiers=[

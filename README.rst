@@ -98,6 +98,11 @@ Running The Tests
 Change Log
 ----------
 
+1.7.1
+^^^^^
+
+* Fix regressions caused by removing implicit waits and Marionette functionality
+
 1.7
 ^^^
 
