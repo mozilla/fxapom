@@ -17,9 +17,9 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture(scope='session')
-def capabilities(capabilities):
-    capabilities.setdefault('tags', []).append('fxapom')
-    return capabilities
+def session_capabilities(session_capabilities):
+    session_capabilities.setdefault('tags', []).append('fxapom')
+    return session_capabilities
 
 
 @pytest.fixture(params=[DEV_URL, PROD_URL])
