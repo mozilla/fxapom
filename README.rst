@@ -98,6 +98,10 @@ Running The Tests
 Change Log
 ----------
 
+1.7.2
+^^^^^
+* Pulled in latest pyfxa 0.1.3
+
 1.7.1
 ^^^^^
 
