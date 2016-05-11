@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='fxapom',
-      version='1.7.2',
+      version='1.8.0',
       description='Mozilla Firefox Accounts Page Object Model',
       long_description=open('README.rst').read(),
       classifiers=[
@@ -22,5 +22,5 @@ setup(name='fxapom',
       url='https://github.com/mozilla/fxapom',
       license='MPL 2.0',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      install_requires=['PyFxA==0.1.3'],
+      install_requires=['PyFxA==0.2.0'],
       include_package_data=True)

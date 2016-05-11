@@ -98,6 +98,10 @@ Running The Tests
 Change Log
 ----------
 
+1.8.0
+^^^^^
+* Pulled in PyFxA 0.2.0, to fix mock-import issue
+
 1.7.2
 ^^^^^
 * Pulled in latest pyfxa 0.1.3
