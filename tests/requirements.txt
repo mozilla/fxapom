@@ -1,4 +1,4 @@
-marionette_driver==1.4.0
+marionette_driver==2.0.0
 mock
 pytest==2.9.1
 pytest-selenium
