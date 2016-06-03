@@ -1,5 +1,5 @@
 marionette_driver==2.0.0
 mock
-pytest==2.9.1
+pytest==2.9.2
 pytest-selenium
 pytest-xdist==1.14
