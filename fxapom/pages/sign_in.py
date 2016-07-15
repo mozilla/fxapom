@@ -58,12 +58,11 @@ class SignIn(Base):
             for handle in handles:
                 self.driver.switch_to.window(handle)
                 if self.is_element_present(*self._fox_logo_locator):
-                    Wait(self.driver, self.timeout).until(
-                        EC.visibility_of_element_located(self._email_input_locator))
                     self._sign_in_window_handle = handle
                     break
             else:
                 raise Exception('Popup has not loaded')
+        Wait(self.driver, self.timeout).until(EC.visibility_of_element_located(self._email_input_locator))
 
     def click_sign_in(self):
         self.driver.find_element(*self._sign_in_locator).click()
