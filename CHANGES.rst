@@ -1,6 +1,10 @@
 Release Notes
 -------------
 
+**1.9.0 (2016-07-15)**
+
+* Wait for the sign in page to load when not in a popup
+
 **1.8.0 (2016-05-11)**
 
 * Pulled in PyFxA 0.2.0, to fix mock-import issue
