@@ -92,8 +92,8 @@ To create an account and then use it to sign in, use both tools described above:
 Running The Tests
 -----------------
 
-* Install the requirements using ``pip install -r requirements.txt``
-* Run the tests using a local Firefox browser via ``py.test --driver=Firefox tests``
+* `Install Tox <http://tox.readthedocs.io/en/latest/install.html>`_
+* Run ``tox``
 
 Resources
 ---------
