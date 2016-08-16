@@ -1,7 +1,7 @@
 language: python
 python: 2.7
 addons:
-  firefox: latest
+  firefox: 47.0.1
 env:
   - TOXENV=tests DISPLAY=:99.0
   - TOXENV=flake8
