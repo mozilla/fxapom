@@ -22,5 +22,5 @@ setup(name='fxapom',
       url='https://github.com/mozilla/fxapom',
       license='MPL 2.0',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      install_requires=['PyFxA==0.2.0'],
+      install_requires=['PyFxA==0.3.0'],
       include_package_data=True)
