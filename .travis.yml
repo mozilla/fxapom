@@ -3,13 +3,23 @@ python: 2.7
 addons:
   firefox: 47.0.1
 env:
-  - TOXENV=tests DISPLAY=:99.0
-  - TOXENV=flake8
+- TOXENV=tests DISPLAY=:99.0
+- TOXENV=flake8
 install:
-  - pip install tox
+- pip install tox
 before_script:
-  - sh -e /etc/init.d/xvfb start
+- sh -e /etc/init.d/xvfb start
 script:
-  - tox
+- tox
 notifications:
   email: webqa-ci@mozilla.org
+deploy:
+  provider: pypi
+  user: davehunt
+  password:
+    secure: GyTB/x+/F1DNmAWF4K8keaBgwUTq6AVgCfdMzArPSLiHxs4Fi98Y44U6YM4fy5qwZ8oJxYYwdlWoooStIYouV8PEg0GOl+x1m7eb02XXZEufVUqQ4p5sN3HHeUmj2Et0j0o0AkUvAZjY2zCS3hI9U8wH+rLrkyR/1g8a88HLeHo=
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    repo: mozilla/fxapom
+    python: 2.7
