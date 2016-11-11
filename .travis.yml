@@ -1,16 +1,43 @@
 language: python
-python: 2.7
+python: 
+  - 2.7
+  - 3.5
 addons:
   firefox: 47.0.1
-env:
-- TOXENV=tests DISPLAY=:99.0
-- TOXENV=flake8
+matrix:
+  global:
+    - DISPLAY=:99.0
+  include:
+    - python: 2.7
+      env: 
+        - TOXENV=py27
+    - python: 2.7
+      env: 
+        - TOXENV=py27-marionette
+    - python: 2.7
+      env: 
+        - TOXENV=flake8
+    - python: 3.5
+      env: 
+        - TOXENV=py35
+    - python: 3.5
+      env: 
+        - TOXENV=py35-marionette
+    - python: 3.5
+      env: 
+        - TOXENV=flake8
+  exclude:
+    - python: 2.7
+    - python: 3.5
+  allow_failures:
+    - env: 
+       - TOXENV=py35-marionette
 install:
-- pip install tox
+  - pip install tox
 before_script:
-- sh -e /etc/init.d/xvfb start
+  - sh -e /etc/init.d/xvfb start
 script:
-- tox
+  - tox
 notifications:
   email: webqa-ci@mozilla.org
 deploy:
