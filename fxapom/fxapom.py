@@ -43,7 +43,7 @@ class WebDriverFxA(object):
 class FxATestAccount:
     """A base test class that can be extended by other tests to include utility methods."""
 
-    password = ''.join([random.choice(string.letters) for i in range(8)])
+    password = ''.join([random.choice(string.ascii_letters) for i in range(8)])
 
     def __init__(self, url=DEV_URL):
         """ Creates an FxATestAccount object, which includes a verified account.
