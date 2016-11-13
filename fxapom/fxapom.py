@@ -57,8 +57,8 @@ class FxATestAccount:
         self.client = Client(self.url)
         # Create and verify the Firefox account
         self.session = self.client.create_account(self.account.email, self.password)
-        print 'fxapom created an account for email: %s at %s on %s' % (
-            self.account.email, self.url, datetime.now())
+        print('fxapom created an account for email: %s at %s on %s' % (
+            self.account.email, self.url, datetime.now()))
         m = self.account.wait_for_email(lambda m: "x-verify-code" in m["headers"])
         if not m:
             raise RuntimeError("Verification email was not received")
@@ -69,8 +69,8 @@ class FxATestAccount:
         try:
             self.account.clear()
             self.client.destroy_account(self.email, self.password)
-            print 'fxapom deleted the account for email: %s at %s on %s' % (
-                self.account.email, self.url, datetime.now())
+            print('fxapom deleted the account for email: %s at %s on %s' % (
+                self.account.email, self.url, datetime.now()))
         except ClientError as err:
             # 'Unknown Account' error is ok - account already deleted
             # https://github.com/mozilla/fxa-auth-server/blob/master/docs/api.md#response-format
