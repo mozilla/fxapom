@@ -3,7 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 from fxapom.fxapom import TIMEOUT
-from page import Page
+from .page import Page
 
 
 class Base(Page):

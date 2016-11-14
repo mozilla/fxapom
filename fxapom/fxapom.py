@@ -33,9 +33,9 @@ class WebDriverFxA(object):
     def sign_in(self, email=None, password=None):
         """Signs in a user, either with the specified email address and password, or a returning user."""
         if isinstance(self.driver, WebDriver):
-            from pages.sign_in import SignIn
+            from .pages.sign_in import SignIn
         else:
-            from pages.marionette.sign_in import MarionetteSignIn as SignIn
+            from .pages.marionette.sign_in import MarionetteSignIn as SignIn
         sign_in = SignIn(self.driver, self.timeout)
         sign_in.sign_in(email, password)
 
