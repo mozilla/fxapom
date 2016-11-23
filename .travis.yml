@@ -1,37 +1,31 @@
 language: python
-python: 
+python:
   - 2.7
   - 3.5
 addons:
   firefox: 47.0.1
-matrix:
+env:
   global:
     - DISPLAY=:99.0
+matrix:
   include:
     - python: 2.7
-      env: 
-        - TOXENV=py27
+      env: TOXENV=flake8
     - python: 2.7
-      env: 
-        - TOXENV=py27-marionette
+      env: TOXENV=py27
     - python: 2.7
-      env: 
-        - TOXENV=flake8
+      env: TOXENV=py27-marionette
     - python: 3.5
-      env: 
-        - TOXENV=py35
+      env: TOXENV=flake8
     - python: 3.5
-      env: 
-        - TOXENV=py35-marionette
+      env: TOXENV=py35
     - python: 3.5
-      env: 
-        - TOXENV=flake8
+      env: TOXENV=py35-marionette
   exclude:
     - python: 2.7
     - python: 3.5
   allow_failures:
-    - env: 
-       - TOXENV=py35-marionette
+    - env: TOXENV=py35-marionette
 install:
   - pip install tox
 before_script:
@@ -50,4 +44,4 @@ deploy:
     tags: true
     repo: mozilla/fxapom
     python: 2.7
-    condition: "$TOXENV = tests"
+    condition: "$TOXENV = py27"
