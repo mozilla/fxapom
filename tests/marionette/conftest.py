@@ -6,6 +6,7 @@ import pytest
 
 from marionette_driver import By, Wait
 from marionette_driver.marionette import Marionette
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 
 
 @pytest.fixture
@@ -19,7 +20,8 @@ def click_login(base_url, marionette, timeout):
 
 @pytest.fixture
 def marionette(request):
-    m = Marionette(bin=request.config.option.bin)
+    firefox_binary = FirefoxBinary()
+    m = Marionette(bin=firefox_binary._get_firefox_start_cmd())
     m.start_session()
     m.set_prefs({'signon.rememberSignons': False})
     request.addfinalizer(m.delete_session)

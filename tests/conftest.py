@@ -9,13 +9,6 @@ from selenium.webdriver.support.wait import WebDriverWait as Wait
 from fxapom.fxapom import DEV_URL, FxATestAccount, PROD_URL, TIMEOUT
 
 
-def pytest_addoption(parser):
-    parser.addoption(
-        '--bin',
-        default='/usr/local/bin/firefox',
-        help='path for Firefox binary')
-
-
 @pytest.fixture(scope='session')
 def session_capabilities(session_capabilities):
     session_capabilities.setdefault('tags', []).append('fxapom')
