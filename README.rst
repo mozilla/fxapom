@@ -15,9 +15,6 @@ Firefox Accounts Page Object Model
 .. image:: https://img.shields.io/github/issues-raw/mozilla/fxapom.svg
    :target: https://github.com/mozilla/fxapom/issues
    :alt: Issues
-.. image:: https://img.shields.io/requires/github/mozilla/fxapom.svg
-   :target: https://requires.io/github/mozilla/fxapom/requirements/?branch=master
-   :alt: Requirements
 
 Overview
 --------
