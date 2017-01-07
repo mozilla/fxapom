@@ -15,6 +15,12 @@ Firefox Accounts Page Object Model
 .. image:: https://img.shields.io/github/issues-raw/mozilla/fxapom.svg
    :target: https://github.com/mozilla/fxapom/issues
    :alt: Issues
+.. image:: https://pyup.io/repos/github/mozilla/fxapom/shield.svg
+   :target: https://pyup.io/repos/github/mozilla/fxapom/
+   :alt: Updates
+.. image:: https://pyup.io/repos/github/mozilla/fxapom/python-3-shield.svg
+   :target: https://pyup.io/repos/github/mozilla/fxapom/
+   :alt: Python 3
 
 Overview
 --------
