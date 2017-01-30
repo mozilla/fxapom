@@ -30,6 +30,7 @@ def writeCapabilities(desiredCapabilities) {
  * @param environment test environment to run
 */
 def runTox(environment) {
+  def options = env.PYTEST_ADDOPTS ?: ''
   def processes = env.PYTEST_PROCESSES ?: 'auto'
   try {
     wrap([$class: 'AnsiColorBuildWrapper']) {
@@ -37,7 +38,7 @@ def runTox(environment) {
         $class: 'StringBinding',
         credentialsId: 'SAUCELABS_API_KEY',
         variable: 'SAUCELABS_API_KEY']]) {
-        withEnv(["PYTEST_ADDOPTS=${PYTEST_ADDOPTS} " +
+        withEnv(["PYTEST_ADDOPTS=${options} " +
           "-n=${processes} " +
           "--driver=SauceLabs " +
           "--variables=capabilities.json " +
