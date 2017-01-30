@@ -34,7 +34,7 @@ before_script:
 script:
   - tox
 notifications:
-  email: webqa-ci@mozilla.org
+  email: fte-ci@mozilla.com
 deploy:
   provider: pypi
   user: davehunt
