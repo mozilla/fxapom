@@ -26,6 +26,7 @@ matrix:
     - python: 2.7
     - python: 3.5
   allow_failures:
+    - env: TOXENV=py35
     - env: TOXENV=py35-marionette
 install:
   - pip install tox

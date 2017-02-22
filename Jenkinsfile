@@ -1,4 +1,4 @@
-@Library('fxtest@1.1') _
+@Library('fxtest@1.2') _
 
 
 /** Desired capabilities */
@@ -39,6 +39,7 @@ pipeline {
         always {
           archiveArtifacts 'results/*'
           junit 'results/*.xml'
+          submitToActiveData('results/py27.log')
           publishHTML(target: [
             allowMissing: false,
             alwaysLinkToLastBuild: true,
