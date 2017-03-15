@@ -1,7 +1,7 @@
 Release Notes
 -------------
 
-**1.10.0 (unreleased)**
+**1.10.0 (2017-03-15)**
 
 * Remove support for the Marionette client
 
