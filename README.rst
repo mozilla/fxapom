@@ -50,10 +50,6 @@ or the production environment, which are:
 * ``fxapom.DEV_URL`` - the url for the development environment
 * ``fxapom.PROD_URL`` - the url for the production environment
 
-FxAPOM is now able to handle tests written using both Selenium WebDriver and Marionette.
-Based on the type of driver being used, the package will automatically handle the tests in the way
-best suited for that driver including all error handling.
-
 Example of creating an account on the development environment, using the default:
 
 .. code-block:: python
@@ -75,13 +71,11 @@ passing in the email address and password:
 .. code-block:: python
 
   from fxapom.fxapom import WebDriverFxA
-  fxa = WebDriverFxA(driver)
+  fxa = WebDriverFxA(selenium)
   fxa.sign_in(email_address, password)
 
-Note that we are passing ``driver`` into the constructor of ``WebDriverFxA``,
-which it then uses to interact with the Firefox Accounts web pages. This driver will
-be identified as either an instance of Selenium or Marionette and the tests will be
-handled accordingly.
+Note that we are passing ``selenium`` into the constructor of ``WebDriverFxA``,
+which it then uses to interact with the Firefox Accounts web pages.
 
 To create an account and then use it to sign in, use both tools described above:
 
@@ -89,7 +83,7 @@ To create an account and then use it to sign in, use both tools described above:
 
   from fxapom.fxapom import FxATestAccount, WebDriverFxA
   account = FxATestAccount()
-  fxa = WebDriverFxA(driver)
+  fxa = WebDriverFxA(selenium)
   fxa.sign_in(account.email, account.password)
 
 Running The Tests

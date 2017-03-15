@@ -14,20 +14,15 @@ matrix:
       env: TOXENV=flake8
     - python: 2.7
       env: TOXENV=py27
-    - python: 2.7
-      env: TOXENV=py27-marionette
     - python: 3.5
       env: TOXENV=flake8
     - python: 3.5
       env: TOXENV=py35
-    - python: 3.5
-      env: TOXENV=py35-marionette
   exclude:
     - python: 2.7
     - python: 3.5
   allow_failures:
     - env: TOXENV=py35
-    - env: TOXENV=py35-marionette
 install:
   - pip install tox
 before_script:

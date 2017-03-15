@@ -6,14 +6,16 @@ from mock import Mock
 
 import pytest
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.remote.webdriver import WebDriver
+from pypom.selenium_driver import ISelenium
+from zope.interface import alsoProvides
 
 from fxapom.pages.sign_in import SignIn
 
 
 @pytest.fixture
 def webdriver(request):
-    driver = Mock(spec=WebDriver)
+    driver = Mock()
+    alsoProvides(driver, ISelenium)
 
     def element(*locator):
         element = Mock()

@@ -1,6 +1,15 @@
 Release Notes
 -------------
 
+**1.10.0 (unreleased)**
+
+* Remove support for the Marionette client
+
+  * The latest versions of Selenium and Firefox use Marionette through
+    GeckoDriver.
+
+* Migrate page objects to PyPOM
+
 **1.9.0 (2016-07-15)**
 
 * Wait for the sign in page to load when not in a popup
