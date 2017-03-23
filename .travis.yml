@@ -2,7 +2,7 @@ sudo: required
 language: python
 python:
   - 2.7
-  - 3.5
+  - 3.6
 addons:
   firefox: 47.0.2
 env:
@@ -14,15 +14,13 @@ matrix:
       env: TOXENV=flake8
     - python: 2.7
       env: TOXENV=py27
-    - python: 3.5
+    - python: 3.6
       env: TOXENV=flake8
-    - python: 3.5
-      env: TOXENV=py35
+    - python: 3.6
+      env: TOXENV=py36
   exclude:
     - python: 2.7
-    - python: 3.5
-  allow_failures:
-    - env: TOXENV=py35
+    - python: 3.6
 install:
   - pip install tox
 before_script:

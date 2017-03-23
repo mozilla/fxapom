@@ -17,7 +17,7 @@ pipeline {
   }
   environment {
     /** See https://issues.jenkins-ci.org/browse/JENKINS-42771 - we'd like to expand this out into multi-line concatenations */
-    PYTEST_ADDOPTS = "-n=10 --tb=short --color=yes --driver=SauceLabs --variables=capabilities.json"
+    PYTEST_ADDOPTS = "-n=10 --tb=short --color=yes --driver=SauceLabs --variables=capabilities.json --log-raw=results/py27.log"
     SAUCELABS_API_KEY = credentials('SAUCELABS_API_KEY')
   }
   stages {
