@@ -1,7 +1,7 @@
 Firefox Accounts Page Object Model
 ==================================
 
-`Selenium WebDriver <http://docs.seleniumhq.org/docs/03_webdriver.jsp>`_ compatible page object model and utilities for `Firefox Accounts <https://accounts.firefox.com>`_
+`Selenium WebDriver <http://docs.seleniumhq.org/docs/03_webdriver.jsp>`_ compatible page-object model and utilities for `Firefox Accounts <https://accounts.firefox.com>`_
 
 .. image:: https://img.shields.io/pypi/l/fxapom.svg
    :target: https://github.com/mozilla/fxapom/blob/master/LICENSE
