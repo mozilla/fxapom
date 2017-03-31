@@ -1,4 +1,4 @@
-@Library('fxtest@1.4') _
+@Library('fxtest@1.5') _
 
 
 /** Desired capabilities */
