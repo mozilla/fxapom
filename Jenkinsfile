@@ -16,8 +16,14 @@ pipeline {
     timeout(time: 1, unit: 'HOURS')
   }
   environment {
-    /** See https://issues.jenkins-ci.org/browse/JENKINS-42771 - we'd like to expand this out into multi-line concatenations */
-    PYTEST_ADDOPTS = "-n=10 --tb=short --color=yes --driver=SauceLabs --variables=capabilities.json --log-raw=results/py27_raw.txt --log-tbpl=results/py27_tbpl.txt"
+    PYTEST_ADDOPTS =
+      "-n=10 " +
+      "--tb=short " +
+      "--color=yes " +
+      "--driver=SauceLabs " +
+      "--variables=capabilities.json " +
+      "--log-raw=results/py27_raw.txt " +
+      "--log-tbpl=results/py27_tbpl.txt"
     PULSE = credentials('PULSE')
     SAUCELABS_API_KEY = credentials('SAUCELABS_API_KEY')
   }
