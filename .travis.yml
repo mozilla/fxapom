@@ -4,7 +4,7 @@ python:
   - 2.7
   - 3.6
 addons:
-  firefox: 52.0.2
+  firefox: 53.0
 env:
   global:
     - DISPLAY=:99.0
