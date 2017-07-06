@@ -1,6 +1,10 @@
 Release Notes
 -------------
 
+**1.10.1 (2017-07-06)**
+
+* Add Python 3.6 classifier
+
 **1.10.0 (2017-03-15)**
 
 * Remove support for the Marionette client
