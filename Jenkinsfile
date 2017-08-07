@@ -1,6 +1,3 @@
-@Library('fxtest@1.6') _
-
-
 /** Desired capabilities */
 def capabilities = [
   browserName: 'Firefox',
@@ -10,6 +7,9 @@ def capabilities = [
 
 pipeline {
   agent any
+  libraries {
+    lib('fxtest@1.6')
+  }
   options {
     ansiColor('xterm')
     timestamps()
