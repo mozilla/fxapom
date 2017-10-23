@@ -1,7 +1,9 @@
 Firefox Accounts Page Object Model
 ==================================
 
-`Selenium WebDriver <http://docs.seleniumhq.org/docs/03_webdriver.jsp>`_ compatible page-object model and utilities for `Firefox Accounts <https://accounts.firefox.com>`_
+`Selenium WebDriver <http://docs.seleniumhq.org/docs/03_webdriver.jsp>`_
+compatible page-object model and utilities for
+`Firefox Accounts <https://accounts.firefox.com>`_
 
 .. image:: https://img.shields.io/pypi/l/fxapom.svg
    :target: https://github.com/mozilla/fxapom/blob/master/LICENSE
@@ -25,48 +27,51 @@ Firefox Accounts Page Object Model
 Overview
 --------
 
-This package contains a utility to create a test Firefox Account on either the dev or prod instance of Firefox Accounts,
-as well as a set of page objects that can be used to interact with Firefox Accounts' sign in screens.
+This package contains a utility to create a test Firefox Account on either the
+dev or prod instance of Firefox Accounts, as well as a set of page objects that
+can be used to interact with Firefox Accounts' sign in screens.
 
 Installation
 ------------
 
-``python setup.py develop``
+To install FxAPOM:
 
-**If running on a Mac, you may need the following before running the above command:**
+.. code-block:: bash
 
-``pip install cryptography``
+  $ pip install fxapom
 
 Usage
 -----
 
-To create a test Firefox Account, simply create an instance of the ``FxATestAccount`` object.
-You can pass the url for the Firefox Accounts API server into the constructor
-or, if you know you want to create a development Account, you can omit that argument.
+To create a test Firefox Account, simply create an instance of the
+``FxATestAccount`` object. You can pass the url for the Firefox Accounts API
+server into the constructor or, if you know you want to create a development
+Account, you can omit that argument.
 
-There are two constants available to you to specify the url for either the development environment
-or the production environment, which are:
+There are two constants available to you to specify the url for either the
+development environment or the production environment, which are:
 
 * ``fxapom.DEV_URL`` - the url for the development environment
 * ``fxapom.PROD_URL`` - the url for the production environment
 
-Example of creating an account on the development environment, using the default:
+Example of creating an account on the development environment, using the
+default:
 
 .. code-block:: python
 
   from fxapom.fxapom import FxATestAccount
   account = FxATestAccount()
 
-
-Example of creating an account on the development environment, specifying the ``DEV_URL``:
+Example of creating an account on the development environment, specifying the
+``DEV_URL``:
 
 .. code-block:: python
 
   from fxapom.fxapom import DEV_URL, FxATestAccount
   account = FxATestAccount(DEV_URL)
 
-To sign in via Firefox Accounts, use the ``sign_in`` method in the ``WebDriverFxA`` object,
-passing in the email address and password:
+To sign in via Firefox Accounts, use the ``sign_in`` method in the
+``WebDriverFxA`` object, passing in the email address and password:
 
 .. code-block:: python
 
@@ -77,7 +82,8 @@ passing in the email address and password:
 Note that we are passing ``selenium`` into the constructor of ``WebDriverFxA``,
 which it then uses to interact with the Firefox Accounts web pages.
 
-To create an account and then use it to sign in, use both tools described above:
+To create an account and then use it to sign in, use both tools described
+above:
 
 .. code-block:: python
 
@@ -86,11 +92,12 @@ To create an account and then use it to sign in, use both tools described above:
   fxa = WebDriverFxA(selenium)
   fxa.sign_in(account.email, account.password)
 
-Running The Tests
------------------
+Contributing
+------------
 
-* `Install Tox <http://tox.readthedocs.io/en/latest/install.html>`_
-* Run ``tox``
+Fork the repository and submit PRs with bug fixes and enhancements,
+contributions are very welcome. Tests can be run locally with
+`tox <http://tox.readthedocs.io/en/latest/>`_.
 
 Resources
 ---------
