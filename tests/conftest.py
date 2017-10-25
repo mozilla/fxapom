@@ -3,10 +3,9 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 import pytest
-
 from selenium.webdriver.support.wait import WebDriverWait as Wait
 
-from fxapom.fxapom import DEV_URL, FxATestAccount, PROD_URL, TIMEOUT
+from fxapom.fxapom import DEV_URL, PROD_URL, TIMEOUT, FxATestAccount
 
 
 @pytest.fixture(scope='session')
