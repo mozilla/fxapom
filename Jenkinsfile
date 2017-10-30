@@ -58,7 +58,8 @@ pipeline {
   post {
     failure {
       emailext(
-        body: '$BUILD_URL\n\n$FAILED_TESTS\n\n$BUILD_LOG',
+        attachLog: true,
+        body: '$BUILD_URL\n\n$FAILED_TESTS',
         replyTo: '$DEFAULT_REPLYTO',
         subject: '$DEFAULT_SUBJECT',
         to: '$DEFAULT_RECIPIENTS')
