@@ -59,6 +59,7 @@ pipeline {
     failure {
       emailext(
         attachLog: true,
+        attachmentsPattern: 'results/py27.html',
         body: '$BUILD_URL\n\n$FAILED_TESTS',
         replyTo: '$DEFAULT_REPLYTO',
         subject: '$DEFAULT_SUBJECT',
