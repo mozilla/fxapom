@@ -25,7 +25,7 @@ pipeline {
       "--log-raw=results/py27_raw.txt " +
       "--log-tbpl=results/py27_tbpl.txt"
     PULSE = credentials('PULSE')
-    SAUCELABS_API_KEY = credentials('SAUCELABS_API_KEY')
+    SAUCELABS = credentials('SAUCELABS')
   }
   stages {
     stage('Lint') {
