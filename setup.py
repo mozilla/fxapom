@@ -25,5 +25,5 @@ setup(name='fxapom',
       license='MPL 2.0',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       setup_requires=['setuptools_scm'],
-      install_requires=['PyFxA==0.3.0', 'PyPOM'],
+      install_requires=['PyFxA==0.4.0', 'PyPOM'],
       include_package_data=True)
