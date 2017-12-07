@@ -6,7 +6,7 @@ compatible page-object model and utilities for
 `Firefox Accounts <https://accounts.firefox.com>`_
 
 .. image:: https://img.shields.io/pypi/l/fxapom.svg
-   :target: https://github.com/mozilla/fxapom/blob/master/LICENSE
+   :target: https://github.com/mozilla/fxapom/blob/master/LICENSE.txt
    :alt: License
 .. image:: https://img.shields.io/pypi/v/fxapom.svg
    :target: https://pypi.python.org/pypi/fxapom/
