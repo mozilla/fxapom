@@ -1,0 +1,8 @@
+.cache
+.tox
+**/__pycache__
+**/*.pyc
+build
+dist
+fxapom.egg-info
+results

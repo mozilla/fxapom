@@ -96,8 +96,15 @@ Contributing
 ------------
 
 Fork the repository and submit PRs with bug fixes and enhancements,
-contributions are very welcome. Tests can be run locally with
-`tox <http://tox.readthedocs.io/en/latest/>`_.
+contributions are very welcome. You can run the tests using
+`Docker <https://www.docker.com/>`_:
+
+.. code-block:: bash
+
+  $ docker build -t fxapom .
+  $ docker run -it fxapom tox
+
+Using
 
 Resources
 ---------

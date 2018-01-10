@@ -1,9 +1,10 @@
 __pycache__
 .cache
+.eggs
+.idea/
 .tox
+*.pyc
 build
 dist
-.idea/
-*.pyc
 fxapom.egg-info
 results/
