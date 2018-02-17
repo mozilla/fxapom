@@ -14,7 +14,7 @@ class Base(Page):
         self._main_window_handle = self.selenium.current_window_handle
 
     def switch_to_main_window(self):
-        self.selenium.switch_to_window(self._main_window_handle)
+        self.selenium.switch_to.window(self._main_window_handle)
 
     def close_window(self):
         self.selenium.close()
