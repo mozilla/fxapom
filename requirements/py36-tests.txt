@@ -1,6 +1,6 @@
 mock==2.0.0
 pytest==3.4.1
-pytest-metadata==1.5.1
+pytest-metadata==1.6.0
 pytest-selenium==1.11.4
 pytest-xdist==1.22.1
 selenium==3.9.0
