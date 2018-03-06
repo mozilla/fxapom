@@ -1,6 +1,7 @@
 FROM ubuntu:xenial
 
-ENV MOZ_HEADLESS=1
+ENV DEBIAN_FRONTEND=noninteractive \
+  MOZ_HEADLESS=1
 
 RUN apt-get update \
   && apt-get install -y software-properties-common \
