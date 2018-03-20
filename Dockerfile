@@ -1,7 +1,8 @@
 FROM ubuntu:xenial
 
 ENV DEBIAN_FRONTEND=noninteractive \
-  MOZ_HEADLESS=1
+  MOZ_HEADLESS=1 \
+  PIP_DISABLE_PIP_VERSION_CHECK=1
 
 RUN apt-get update \
   && apt-get install -y software-properties-common \
@@ -29,9 +30,8 @@ RUN curl -fsSLo /tmp/geckodriver.tar.gz https://github.com/mozilla/geckodriver/r
   && chmod 755 /opt/geckodriver-$GECKODRIVER_VERSION \
   && ln -fs /opt/geckodriver-$GECKODRIVER_VERSION /usr/bin/geckodriver
 
-ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
-  TOX_VERSION=2.9.1
-RUN pip3 install --disable-pip-version-check tox==$TOX_VERSION
+ENV TOX_VERSION=2.9.1
+RUN pip3 install tox==$TOX_VERSION
 
 ADD . /src
 WORKDIR /src
