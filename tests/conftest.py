@@ -5,7 +5,7 @@
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait as Wait
 
-from fxapom.fxapom import DEV_URL, PROD_URL, TIMEOUT, FxATestAccount
+from fxapom.fxapom import TIMEOUT
 
 
 @pytest.fixture(scope='session')
@@ -21,16 +21,6 @@ def capabilities(request, capabilities):
     if capabilities.get('browserName', driver).lower() == 'firefox':
         capabilities['marionette'] = True
     return capabilities
-
-
-@pytest.fixture(params=[DEV_URL, PROD_URL])
-def account(request):
-    return FxATestAccount(request.param)
-
-
-@pytest.fixture
-def dev_account():
-    return FxATestAccount(DEV_URL)
 
 
 @pytest.fixture

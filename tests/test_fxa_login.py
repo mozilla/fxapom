@@ -13,9 +13,9 @@ class TestLogin(object):
 
     _fxa_logged_in_indicator_locator = (By.ID, 'loggedin')
 
-    def test_user_can_sign_in(self, selenium, dev_account, click_login, timeout):
+    def test_user_can_sign_in(self, selenium, fxa_account, click_login, timeout):
         fxa = WebDriverFxA(selenium, timeout)
-        fxa.sign_in(dev_account.email, dev_account.password)
+        fxa.sign_in(fxa_account.email, fxa_account.password)
         # We sometimes need to wait longer than the standard 10 seconds
         Wait(selenium, timeout).until(
             EC.visibility_of_element_located(self._fxa_logged_in_indicator_locator))
