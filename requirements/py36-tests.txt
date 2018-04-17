@@ -1,6 +1,6 @@
 mock==2.0.0
 pyfxa==0.5.0
-pypom==1.3.0
+pypom==2.0.0
 pytest==3.5.0
 pytest-fxa==1.0.0
 pytest-metadata==1.7.0
