@@ -17,12 +17,9 @@ compatible page-object model and utilities for
 .. image:: https://img.shields.io/github/issues-raw/mozilla/fxapom.svg
    :target: https://github.com/mozilla/fxapom/issues
    :alt: Issues
-.. image:: https://pyup.io/repos/github/mozilla/fxapom/shield.svg
-   :target: https://pyup.io/repos/github/mozilla/fxapom/
-   :alt: Updates
-.. image:: https://pyup.io/repos/github/mozilla/fxapom/python-3-shield.svg
-   :target: https://pyup.io/repos/github/mozilla/fxapom/
-   :alt: Python 3
+.. image:: https://api.dependabot.com/badges/status?host=github&repo=mozilla/fxapom
+   :target: https://dependabot.com
+   :alt: Dependabot
 
 Overview
 --------
