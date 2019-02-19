@@ -1,2 +1,2 @@
-flake8==3.7.5
+flake8==3.7.6
 flake8-isort==2.6.0
