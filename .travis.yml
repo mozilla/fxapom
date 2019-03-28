@@ -28,5 +28,3 @@ cache:
 before_install: docker build -t mozilla/fxapom .
 install: skip
 script: docker run -e TOXENV=$TOXENV mozilla/fxapom tox
-notifications:
-  email: fte-ci@mozilla.com
