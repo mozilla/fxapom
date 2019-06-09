@@ -1,6 +1,6 @@
 mock==3.0.5
 mozlog==4.1
-pyfxa==0.7.1
+pyfxa==0.7.2
 pypom==2.2.0
 pytest==4.5.0
 pytest-fxa==1.4.0
